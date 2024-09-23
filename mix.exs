@@ -7,11 +7,18 @@ defmodule ExDhcp.MixProject do
       version: "0.1.5",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
+      compilers: [:yecc] ++ Mix.compilers(),
+      compilers: [:leex] ++ Mix.compilers(),
       elixirc_paths: elixirc_paths(Mix.env()),
       description: description(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
       source_url: "https://github.com/ityonemo/ex_dhcp",
       package: package(),
       docs: docs()
@@ -40,11 +47,11 @@ defmodule ExDhcp.MixProject do
   defp deps do
     [
       {:elixir_uuid, "~> 1.2", only: [:test]},
-      {:credo, "~> 1.1", only: [:test, :dev], runtime: false},
-      {:dialyxir, "~> 0.5.1", only: :dev, runtime: false},
-      {:licensir, "~> 0.4.2", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.20.2", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.11.1", only: :test}
+      {:credo, "~> 1.7", only: [:test, :dev], runtime: false},
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
+      {:licensir, "~> 0.7", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.34.2", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.18.3", only: :test}
     ]
   end
 
@@ -57,8 +64,9 @@ defmodule ExDhcp.MixProject do
       extra_section: "GUIDES",
       extras: [
         "README.md",
-        "pxe_guide.md"],
-      groups_for_extras: ["Guides": "pxe_guide.md"]
+        "pxe_guide.md"
+      ],
+      groups_for_extras: [Guides: "pxe_guide.md"]
     ]
   end
 end
